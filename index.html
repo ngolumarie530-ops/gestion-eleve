@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gestion Eleve</title>
+<script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 p-4">
+<div class="max-w-4xl mx-auto bg-white rounded shadow p-6">
+<h1 class="text-2xl font-bold text-center mb-6">📚 Gestion des Eleves</h1>
+<input id="nom" placeholder="Nom de l'eleve" class="border p-2 rounded w-full mb-2">
+<input id="classe" placeholder="Classe" class="border p-2 rounded w-full mb-2">
+<input id="matricule" placeholder="Matricule" class="border p-2 rounded w-full mb-2">
+<button onclick="ajouter()" class="bg-blue-600 text-white p-2 rounded w-full mb-4">Ajouter Eleve</button>
+<table class="w-full border"><thead class="bg-gray-100"><tr><th class="p-2 border">Nom</th><th class="p-2 border">Classe</th><th class="p-2 border">Matricule</th></tr></thead><tbody id="liste"></tbody></table>
+</div>
+<script>
+let eleves=JSON.parse(localStorage.getItem('eleves')||'[]');
+function ajouter(){let n=document.getElementById('nom').value;let c=document.getElementById('classe').value;let m=document.getElementById('matricule').value;if(!n||!c||!m)return alert('Remplis tous les champs');eleves.push({nom:n,classe:c,matricule:m});localStorage.setItem('eleves',JSON.stringify(eleves));document.getElementById('nom').value='';document.getElementById('classe').value='';document.getElementById('matricule').value='';afficher();}
+function afficher(){let h='';eleves.forEach(e=>{h+=<tr><td class="p-2 border">${e.nom}</td><td class="p-2 border">${e.classe}</td><td class="p-2 border">${e.matricule}</td></tr>});document.getElementById('liste').innerHTML=h;}
+afficher();
+</script>
+</body>
+</html>
